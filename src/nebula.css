@@ -1,0 +1,33 @@
+/* nebula.css — Neo-Táctil theme */
+html { background-color: #0d1520 !important; }
+body { background-color: #0d1520 !important; }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% -10%, rgba(56,182,255,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at -10% 80%, rgba(56,220,200,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%,  rgba(200,100,255,0.06) 0%, transparent 65%),
+    #0d1520;
+}
+
+:root {
+  --nb-bg:        #0d1520;
+  --nb-surface:   #111c2d;
+  --nb-surface2:  #1a2e45;
+  --nb-blue:      #38b6ff;
+  --nb-blue-dim:  #1a7fd4;
+  --nb-cyan:      #38dcc8;
+  --nb-green:     #50dc64;
+  --nb-red:       #ff6680;
+  --nb-amber:     #f0b830;
+  --nb-purple:    #c864ff;
+  --nb-orange:    #ff7840;
+  --nb-text:      #e8f4ff;
+  --nb-text2:     rgba(232,244,255,0.55);
+  --nb-text3:     rgba(140,180,204,0.45);
+  --nb-border:    rgba(56,182,255,0.1);
+}
