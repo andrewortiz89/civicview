@@ -21,24 +21,8 @@ Desarrollado como proyecto final para el **Tecnólogo en Análisis y Desarrollo 
 
 > *Dashboard principal con tema Neo-Táctil*
 
-```
-┌─────────────────────────────────────────────────────┐
-│  CivicView          10:52:27  MIÉ, 25 MAR   • LIVE  │
-├──────────┬──────────┬──────────┬────────────────────┤
-│ Calidad  │ Pico y   │  Clima   │    Ciclorutas      │
-│ del Aire │  Placa   │ Bogotá   │                    │
-│   137    │ 6·7·8·9·0│   17°C   │      392 km        │
-├──────────┴──┬───────┴───┬──────┴────────────────────┤
-│Contaminantes│  Agenda   │    Mapa Interactivo        │
-│  PM2.5 137  │ Cultural  │  • Ciclorutas              │
-│  PM10   58  │           │  • Bibliotecas             │
-│  NO₂     7  │           │  • Parques                 │
-├─────────────┴───────────┴────────────────────────────┤
-│     Eventos Hoy          │    Sedes · Bibliotecas    │
-└──────────────────────────┴───────────────────────────┘
-```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/29d4a241-70a6-45e1-ace4-48e3b1960bfe" />
 
----
 
 ## Funcionalidades
 
