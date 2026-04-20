@@ -8,7 +8,7 @@
 [![SENA](https://img.shields.io/badge/SENA-Proyecto%20Final-orange)](https://www.sena.edu.co)
 
 ---
-Demo en vivo https://civicview.vercel.app/
+🌐 **[VER DEMO EN VIVO](https://civicview.vercel.app/))** 🌐
 ## Descripción
 
 CivicView es una aplicación web que centraliza la información cívica más relevante de Bogotá D.C. en un único dashboard moderno e interactivo. El proyecto integra datos en tiempo real sobre calidad del aire, restricciones de tráfico (Pico y Placa), clima, eventos culturales y puntos de interés urbanos, permitiendo a los ciudadanos tomar decisiones informadas en su vida cotidiana.
