@@ -8,7 +8,7 @@
 [![SENA](https://img.shields.io/badge/SENA-Proyecto%20Final-orange)](https://www.sena.edu.co)
 
 ---
-
+🌐 **[VER DEMO EN VIVO](https://civicview.vercel.app/)** 🌐
 ## Descripción
 
 CivicView es una aplicación web que centraliza la información cívica más relevante de Bogotá D.C. en un único dashboard moderno e interactivo. El proyecto integra datos en tiempo real sobre calidad del aire, restricciones de tráfico (Pico y Placa), clima, eventos culturales y puntos de interés urbanos, permitiendo a los ciudadanos tomar decisiones informadas en su vida cotidiana.
@@ -21,24 +21,8 @@ Desarrollado como proyecto final para el **Tecnólogo en Análisis y Desarrollo 
 
 > *Dashboard principal con tema Neo-Táctil*
 
-```
-┌─────────────────────────────────────────────────────┐
-│  CivicView          10:52:27  MIÉ, 25 MAR   • LIVE  │
-├──────────┬──────────┬──────────┬────────────────────┤
-│ Calidad  │ Pico y   │  Clima   │    Ciclorutas      │
-│ del Aire │  Placa   │ Bogotá   │                    │
-│   137    │ 6·7·8·9·0│   17°C   │      392 km        │
-├──────────┴──┬───────┴───┬──────┴────────────────────┤
-│Contaminantes│  Agenda   │    Mapa Interactivo        │
-│  PM2.5 137  │ Cultural  │  • Ciclorutas              │
-│  PM10   58  │           │  • Bibliotecas             │
-│  NO₂     7  │           │  • Parques                 │
-├─────────────┴───────────┴────────────────────────────┤
-│     Eventos Hoy          │    Sedes · Bibliotecas    │
-└──────────────────────────┴───────────────────────────┘
-```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/29d4a241-70a6-45e1-ace4-48e3b1960bfe" />
 
----
 
 ## Funcionalidades
 

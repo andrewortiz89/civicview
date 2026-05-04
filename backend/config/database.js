@@ -1,73 +1,75 @@
 // server/config/database.js
-import mysql from 'mysql2/promise'
-import 'dotenv/config'
+import mysql from "mysql2/promise";
+import "dotenv/config";
 
 // ── Pool de conexiones ────────────────────────────────────────────────────────
 const pool = mysql.createPool({
-  host:               process.env.DB_HOST     || 'localhost',
+  host: process.env.DB_HOST || "localhost",
   // TiDB usa el puerto 4000 por defecto
-  port:    parseInt(  process.env.DB_PORT     || '4000'), 
-  user:               process.env.DB_USER     || 'root',
-  password:           process.env.DB_PASSWORD || '',
-  database:           process.env.DB_NAME     || 'test', 
-  
+  port: parseInt(process.env.DB_PORT || "4000"),
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "test",
+
   // ── CONFIGURACIÓN CRÍTICA PARA TiDB CLOUD ──────────────────────────────────
   ssl: {
-    minVersion: 'TLSv1.2',
-    rejectUnauthorized: true // Esto permite una conexión segura cifrada
+    minVersion: "TLSv1.2",
+    rejectUnauthorized: true, // Esto permite una conexión segura cifrada
   },
   // ───────────────────────────────────────────────────────────────────────────
 
   waitForConnections: true,
-  connectionLimit:    10,
-  queueLimit:         0,
-  timezone:           '-05:00',           // America/Bogota
-  charset:            'utf8mb4',
-  connectTimeout:     15_000,             // Aumentamos un poco el tiempo para conexiones remotas
-})
+  connectionLimit: 10,
+  queueLimit: 0,
+  timezone: "-05:00", // America/Bogota
+  charset: "utf8mb4",
+  connectTimeout: 15_000, // Aumentamos un poco el tiempo para conexiones remotas
+});
 
 // ── Test de conexión al iniciar ───────────────────────────────────────────────
 export async function testConnection() {
   try {
-    const conn = await pool.getConnection()
-    await conn.query('SELECT 1')
-    conn.release()
-    console.log('✅ MySQL (TiDB Cloud) conectado correctamente')
-    return true
+    const conn = await pool.getConnection();
+    await conn.query("SELECT 1");
+    conn.release();
+    console.log("✅ MySQL (TiDB Cloud) conectado correctamente");
+    return true;
   } catch (err) {
-    console.error('❌ Error conectando a TiDB:', err.message)
-    console.warn('⚠️  El servidor continuará sin base de datos (solo caché en memoria)')
-    return false
+    console.error("❌ Error conectando a TiDB:", err.message);
+    console.warn(
+      "⚠️  El servidor continuará sin base de datos (solo caché en memoria)",
+    );
+    return false;
   }
 }
 
 // ── Helper: ejecutar query con manejo de errores ──────────────────────────────
 export async function query(sql, params = []) {
   try {
-    const [rows] = await pool.execute(sql, params)
-    return rows
+    const [rows] = await pool.execute(sql, params);
+    return rows;
   } catch (err) {
-    console.error('[DB Error]', err.message, '| SQL:', sql.substring(0, 80))
-    throw err
+    console.error("[DB Error]", err.message, "| SQL:", sql.substring(0, 80));
+    throw err;
   }
 }
 
 // ── Helper: obtener un único registro ────────────────────────────────────────
 export async function queryOne(sql, params = []) {
-  const rows = await query(sql, params)
-  return rows[0] || null
+  const rows = await query(sql, params);
+  return rows[0] || null;
 }
 
 // ── Verificar si la DB está disponible ───────────────────────────────────────
 export async function isDBAvailable() {
   try {
-    const conn = await pool.getConnection()
-    await conn.query('SELECT 1')
-    conn.release()
-    return true
+    const conn = await pool.getConnection();
+    await conn.query("SELECT 1");
+    conn.release();
+    return true;
   } catch {
-    return false
+    return false;
   }
 }
 
-export default pool
+export default pool;
