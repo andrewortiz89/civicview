@@ -40,7 +40,13 @@ El proyecto está dividido en un entorno cliente-servidor (Frontend y Backend) r
 - **Uso:** Almacenamiento de logs de peticiones (`api_logs`) y gestión del uso de proveedores de API (`api_providers`) para rate limiting.
 
 ---
+### Capturas de pantalla
+---
+> *Dashboard principal con tema Neo-Táctil*
 
+<img width="1892" height="994" alt="captura1" src="https://github.com/user-attachments/assets/670710a3-c9ec-4de0-a54e-8d77ba8e23f8" />
+
+---
 ## ⚙️ Configuración y Despliegue Local
 
 Si deseas correr este proyecto de manera local, sigue estos pasos:
@@ -49,14 +55,6 @@ Si deseas correr este proyecto de manera local, sigue estos pasos:
 ```bash
 git clone [https://github.com/andrewortiz89/civicview.git](https://github.com/andrewortiz89/civicview.git)
 cd civicview
-
----
-
-### Capturas de pantalla
----
-> *Dashboard principal con tema Neo-Táctil*
-
-<img width="1892" height="994" alt="captura1" src="https://github.com/user-attachments/assets/670710a3-c9ec-4de0-a54e-8d77ba8e23f8" />
 
 ---
 
