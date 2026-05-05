@@ -108,10 +108,9 @@ APIs externas
 ├── OpenWeatherMap  — Clima y pronóstico
 ├── AQICN           — Calidad del aire (ICA)
 └── Datos Abiertos Bogotá (SOCRATA) — Eventos culturales
-```
+
 
 ---
-
 ## Estructura del proyecto
 
 civicview-frontend/
@@ -156,7 +155,6 @@ civicview-frontend/
 └── .env.example
 ```
 
----
 
 ## Instalación y uso
 
