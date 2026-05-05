@@ -53,15 +53,15 @@ cd civicview
 ---
 
 ### Capturas de pantalla
-
+---
 > *Dashboard principal con tema Neo-Táctil*
 
 <img width="1892" height="994" alt="captura1" src="https://github.com/user-attachments/assets/670710a3-c9ec-4de0-a54e-8d77ba8e23f8" />
 
-
+---
 
 ## Funcionalidades
-
+---
 ### Módulos del dashboard
 
 | Módulo | Descripción | Fuente de datos |
@@ -73,6 +73,8 @@ cd civicview
 | **Mapa Interactivo** | Ciclorutas (polilíneas), bibliotecas, parques y centros culturales con panel lateral de lista | OpenStreetMap / Leaflet |
 | **Ciclorutas** | Estado de la red de ciclorutas (392 km) | Estático / SDM |
 | **Sedes Bibliotecas** | Estado de las 5 bibliotecas mayores de Bogotá | Datos Abiertos Bogotá |
+
+---
 
 ### Características técnicas
 
