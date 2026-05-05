@@ -52,7 +52,7 @@ cd civicview
 
 ---
 
-# Capturas de pantalla
+### Capturas de pantalla
 
 > *Dashboard principal con tema Neo-Táctil*
 
