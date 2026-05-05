@@ -61,7 +61,7 @@ cd civicview
 ---
 
 ## Funcionalidades
----
+
 ### Módulos del dashboard
 
 | Módulo | Descripción | Fuente de datos |
@@ -88,7 +88,6 @@ cd civicview
 
 ## Stack tecnológico
 
-```
 Frontend
 ├── React 18.3          — UI declarativa con hooks
 ├── Vite 5.4            — Build tool y dev server
@@ -115,7 +114,6 @@ APIs externas
 
 ## Estructura del proyecto
 
-```
 civicview-frontend/
 ├── public/
 ├── src/
