@@ -1,28 +1,62 @@
-# CivicView 🏙️
+# 🏙️ CivicView - Sistema de Información Ciudadana (Bogotá D.C.)
 
-> **Tu ciudad en un vistazo** — Dashboard cívico en tiempo real para Bogotá D.C.
+**CivicView** es un dashboard centralizado diseñado para los ciudadanos de Bogotá, que consolida información vital en tiempo real sobre el clima, la calidad del aire, restricciones de movilidad (Pico y Placa) y la agenda cultural de la ciudad. 
 
-[![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=white)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
-[![License](https://img.shields.io/badge/Licencia-MIT-green)](LICENSE)
-[![SENA](https://img.shields.io/badge/SENA-Proyecto%20Final-orange)](https://www.sena.edu.co)
-
----
-🌐 **[VER DEMO EN VIVO](https://civicview.vercel.app/)** 🌐
-## Descripción
-
-CivicView es una aplicación web que centraliza la información cívica más relevante de Bogotá D.C. en un único dashboard moderno e interactivo. El proyecto integra datos en tiempo real sobre calidad del aire, restricciones de tráfico (Pico y Placa), clima, eventos culturales y puntos de interés urbanos, permitiendo a los ciudadanos tomar decisiones informadas en su vida cotidiana.
-
-Desarrollado como proyecto final para el **Tecnólogo en Análisis y Desarrollo de Software — SENA**, por **Jeyson Andrés Ortiz Mendoza** (2026).
+🚀 **Demo en vivo:** [https://civicview.vercel.app](https://civicview.vercel.app)
 
 ---
 
-## Capturas de pantalla
+## ✨ Características Principales
 
+- **☁️ Clima en Tiempo Real:** Condiciones meteorológicas actuales, temperatura y humedad (vía OpenWeather).
+- **💨 Calidad del Aire (AQI):** Monitoreo de contaminantes (PM2.5, PM10, NO2, O3) e índice de calidad del aire actualizado (vía AQICN).
+- **🚗 Movilidad (Pico y Placa):** Estado actual de la restricción vehicular y dígitos restringidos del día.
+- **🎭 Agenda Cultural:** Integración con datos abiertos (Socrata) para mostrar eventos gratuitos y actividades culturales en la ciudad.
+- **🚲 Ciclorutas:** Información de la red de ciclorutas habilitadas.
+- **⚡ Optimización y Rendimiento:** Sistema de caché en memoria integrado en el backend para minimizar las llamadas a APIs externas y reducir la latencia.
+- **🛡️ Resiliencia:** Capa de abstracción de APIs con sistema de reintentos (retry) y fallback en caso de caídas de servicios de terceros.
+
+---
+
+## 🛠️ Arquitectura y Tecnologías (Nueva Infraestructura)
+
+El proyecto está dividido en un entorno cliente-servidor (Frontend y Backend) recientemente migrado para mayor escalabilidad:
+
+### Frontend
+- **Framework:** React + Vite
+- **Estilos:** CSS / Diseño Responsivo (Mobile-first)
+- **Peticiones HTTP:** Axios
+- **Despliegue:** [Vercel](https://vercel.com)
+
+### Backend
+- **Entorno:** Node.js + Express
+- **Seguridad y Middleware:** Helmet, CORS, Morgan, Express Rate Limit
+- **Gestión de Caché:** `node-cache`
+- **Despliegue:** [Render](https://render.com) (Web Service)
+
+### Base de Datos
+- **Motor:** MySQL
+- **Hosting:** [TiDB Cloud](https://tidbcloud.com) (Serverless)
+- **Uso:** Almacenamiento de logs de peticiones (`api_logs`) y gestión del uso de proveedores de API (`api_providers`) para rate limiting.
+
+---
+### Capturas de pantalla
+---
 > *Dashboard principal con tema Neo-Táctil*
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/29d4a241-70a6-45e1-ace4-48e3b1960bfe" />
+<img width="1892" height="994" alt="captura1" src="https://github.com/user-attachments/assets/670710a3-c9ec-4de0-a54e-8d77ba8e23f8" />
 
+---
+## ⚙️ Configuración y Despliegue Local
+
+Si deseas correr este proyecto de manera local, sigue estos pasos:
+
+### 1. Clonar el repositorio
+```bash
+git clone [https://github.com/andrewortiz89/civicview.git](https://github.com/andrewortiz89/civicview.git)
+cd civicview
+
+---
 
 ## Funcionalidades
 
@@ -38,6 +72,8 @@ Desarrollado como proyecto final para el **Tecnólogo en Análisis y Desarrollo 
 | **Ciclorutas** | Estado de la red de ciclorutas (392 km) | Estático / SDM |
 | **Sedes Bibliotecas** | Estado de las 5 bibliotecas mayores de Bogotá | Datos Abiertos Bogotá |
 
+---
+
 ### Características técnicas
 
 - **Pico y Placa actualizado** — Norma 2026: franja única 6:00 AM–9:00 PM, lunes a viernes. Alternancia por paridad del día del mes (días impares: dígitos 6-7-8-9-0; días pares: dígitos 1-2-3-4-5). Motocicletas exentas (Decreto 003/2023).
@@ -50,7 +86,6 @@ Desarrollado como proyecto final para el **Tecnólogo en Análisis y Desarrollo 
 
 ## Stack tecnológico
 
-```
 Frontend
 ├── React 18.3          — UI declarativa con hooks
 ├── Vite 5.4            — Build tool y dev server
@@ -71,13 +106,11 @@ APIs externas
 ├── OpenWeatherMap  — Clima y pronóstico
 ├── AQICN           — Calidad del aire (ICA)
 └── Datos Abiertos Bogotá (SOCRATA) — Eventos culturales
-```
+
 
 ---
-
 ## Estructura del proyecto
 
-```
 civicview-frontend/
 ├── public/
 ├── src/
@@ -120,7 +153,6 @@ civicview-frontend/
 └── .env.example
 ```
 
----
 
 ## Instalación y uso
 
