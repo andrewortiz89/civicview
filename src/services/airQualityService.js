@@ -16,7 +16,7 @@ class AirQualityService {
       }
 
       console.log('💨 Obteniendo calidad del aire desde backend...')
-      const { data } = await axios.get(`${BACKEND_URL}/air-quality`, { timeout: 10_000 })
+      const { data } = await axios.get(`${BACKEND_URL}/air-quality`, { timeout: 60_000 })
 
       const result = { ...data, timestamp: getCurrentTimestamp() }
       this.saveToCache(result)

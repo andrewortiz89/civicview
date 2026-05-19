@@ -16,7 +16,7 @@ class WeatherService {
       }
 
       console.log('☁️ Obteniendo clima desde backend...')
-      const { data } = await axios.get(`${BACKEND_URL}/weather`, { timeout: 10_000 })
+      const { data } = await axios.get(`${BACKEND_URL}/weather`, { timeout: 60_000 })
 
       // Guardar en caché local
       const result = { ...data, timestamp: getCurrentTimestamp() }

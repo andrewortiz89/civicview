@@ -53,7 +53,7 @@ export async function getEvents(forceRefresh = false) {
   }
 
   console.log('🎭 Obteniendo eventos desde backend...')
-  const { data } = await axios.get(`${BACKEND_URL}/events`, { timeout: 15_000 })
+  const { data } = await axios.get(`${BACKEND_URL}/events`, { timeout: 60_000 })
   const events = data.events || []
 
   // Log de fuentes para debug
