@@ -362,7 +362,11 @@ function DigitosHoy({ today, userDigit }) {
 // ── 5. CALENDARIO SEMANAL (generado desde el servicio) ────────
 function CalendarioSemanal({ userDigit }) {
   const weekCalendar = PicoPlacaService.getWeekCalendar();
-  const todayStr = new Date().toISOString().split("T")[0];
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const dayStr = String(now.getDate()).padStart(2, '0');
+  const todayStr = `${year}-${month}-${dayStr}`;
 
   return (
     <div style={{padding:"14px 18px"}}>

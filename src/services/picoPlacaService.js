@@ -74,7 +74,13 @@ class PicoPlacaService {
     // Lo parseamos a un array (['6','7','8','9','0'] o [])[cite: 11]
     const restrictedDigitsArray = parseDigits(rawDigits);
 
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const dayStr = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${dayStr}`;
+
     return {
+      date:             formattedDate,
       day:              dow,
       dayOfMonth,
       dayName:          dayNames[dow],
