@@ -244,9 +244,9 @@ function CardBigNumber({ children, color }) {
   // Número más grande y dominante
   return (
     <p
+      className="nb-big-number"
       style={{
         ...T.num,
-        fontSize: "2.625rem",
         color: color || T.text,
         marginBottom: 4,
         lineHeight: 0.95,
@@ -1013,28 +1013,45 @@ export default function Home() {
         @keyframes fadeUp  { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
         @keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
         @keyframes livePing{ 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
-        /* ── Tablet (≤1024px): 4→2 cols, 3→2 cols ── */
+        /* ── Tamaños de Tipografía Responsiva ── */
+        .nb-big-number {
+          font-size: 2.625rem;
+        }
+        @media(max-width:1024px) {
+          .nb-big-number {
+            font-size: 2.25rem;
+          }
+        }
+        @media(max-width:580px) {
+          .nb-big-number {
+            font-size: 1.85rem;
+          }
+        }
+        /* ── Tablet (≤1024px): 4→2 cols, 3→2 cols con mapa expandido para simetría ── */
         @media(max-width:1024px){
           .nb-r4{grid-template-columns:repeat(2,1fr)!important}
           .nb-r3{grid-template-columns:repeat(2,1fr)!important}
+          .nb-r3 > div:nth-child(3){grid-column:span 2!important}
           .nb-r2{grid-template-columns:1fr!important}
         }
-        /* ── Móvil grande (≤768px) ── */
+        /* ── Pantallas medianas/pequeñas (≤768px): main layout ── */
         @media(max-width:768px){
           .nb-r4{grid-template-columns:repeat(2,1fr)!important}
           .nb-r3{grid-template-columns:1fr!important}
+          .nb-r3 > div:nth-child(3){grid-column:auto!important}
           .nb-r2{grid-template-columns:1fr!important}
           .nb-main{padding:1rem 1rem 3rem!important}
         }
-        /* ── Móvil pequeño (≤480px): todo 1 col ── */
-        @media(max-width:480px){
-          .nb-r4{grid-template-columns:repeat(2,1fr)!important}
-          .nb-r3,.nb-r2{grid-template-columns:1fr!important}
+        /* ── Móvil (≤580px): todo en 1 columna para evitar deformar tarjetas y texto ── */
+        @media(max-width:580px){
+          .nb-r4{grid-template-columns:1fr!important}
+          .nb-r3{grid-template-columns:1fr!important}
+          .nb-r3 > div:nth-child(3){grid-column:auto!important}
+          .nb-r2{grid-template-columns:1fr!important}
           .nb-main{padding:0.75rem 0.75rem 3rem!important}
         }
-        /* ── Muy pequeño (≤380px): todo 1 col ── */
+        /* ── Ajuste fino para pantallas mini (≤380px) ── */
         @media(max-width:380px){
-          .nb-r4,.nb-r3,.nb-r2{grid-template-columns:1fr!important}
           .nb-main{padding:0.5rem 0.5rem 3rem!important}
         }
         ::-webkit-scrollbar{width:4px}

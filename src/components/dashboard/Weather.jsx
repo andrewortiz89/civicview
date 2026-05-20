@@ -259,7 +259,7 @@ function WindCompass({speed, direction="NE"}) {
 function WeatherSkeleton() {
   return (
     <div style={{padding:20,display:"flex",flexDirection:"column",gap:16}}>
-      <div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr 1fr",gap:12}}>
+      <div className="nb-weather-top-grid">
         {[1,2,3,4].map(i=><Sk key={i} h={160} r={14}/>)}
       </div>
       <Sk h={90} r={12}/>
@@ -335,8 +335,7 @@ const Weather = () => {
       </div>
 
       {/* ── Sección 1: Grid 2x2 cards ─────────────────────── */}
-      <div style={{padding:"16px 18px",
-        display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+      <div style={{padding:"16px 18px"}} className="nb-weather-top-grid">
 
         {/* ── Card 1: Condición actual ── */}
         <div style={{borderRadius:16,padding:"18px",
@@ -588,8 +587,7 @@ const Weather = () => {
       <Divider/>
 
       {/* ── Sección 3: Gráficas ───────────────────────────── */}
-      <div style={{padding:"14px 18px",
-        display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+      <div style={{padding:"14px 18px"}} className="nb-weather-charts-grid">
         <div style={{borderRadius:12,padding:"16px",
           background:"rgba(255,255,255,0.03)",
           border:"1px solid rgba(56,182,255,0.12)"}}>
@@ -671,8 +669,7 @@ const Weather = () => {
       <Divider/>
 
       {/* ── Sección 5: Alerta + UV + Fase lunar ──────────── */}
-      <div style={{padding:"14px 18px",
-        display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
+      <div style={{padding:"14px 18px"}} className="nb-weather-bottom-grid">
 
         {/* Alerta climática */}
         <div style={{borderRadius:12,padding:"16px",
@@ -752,9 +749,7 @@ const Weather = () => {
 
       <Divider/>
 
-      {/* ── Footer stats ──────────────────────────────────── */}
-      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",
-        background:"rgba(0,0,0,0.2)"}}>
+      <div className="nb-weather-footer-grid">
         {[
           {val:`${Math.round(forecast?.[0]?.tempMax||current.temperature)}°C`, label:"MÁX HOY", color:T.pinkL},
           {val:`${Math.round(forecast?.[0]?.tempMin||current.temperature)}°C`, label:"MÍN HOY", color:T.cyanL},
@@ -762,8 +757,7 @@ const Weather = () => {
           {val:`${current.humidity}%`,          label:"HUMEDAD",      color:T.cyanL},
           {val:`UV ${uv.val}`,                  label:"ÍNDICE UV",    color:uv.color},
         ].map((s,i)=>(
-          <div key={i} style={{padding:"11px 14px",
-            borderRight:i<4?`1px solid ${T.border}`:"none"}}>
+          <div key={i} className="nb-weather-footer-item">
             <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:3}}>
               <span style={{width:6,height:6,borderRadius:"50%",
                 background:s.color,boxShadow:`0 0 5px ${s.color}`,
@@ -779,6 +773,89 @@ const Weather = () => {
       <style>{`
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
         @keyframes livePing { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
+
+        .nb-weather-top-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        @media(max-width: 680px) {
+          .nb-weather-top-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-weather-charts-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+        @media(max-width: 768px) {
+          .nb-weather-charts-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-weather-bottom-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 12px;
+        }
+        @media(max-width: 768px) {
+          .nb-weather-bottom-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-weather-footer-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          background: rgba(0,0,0,0.2);
+        }
+        .nb-weather-footer-item {
+          padding: 11px 14px;
+          border-right: 1px solid rgba(56,182,255,0.08);
+          min-width: 0;
+        }
+        .nb-weather-footer-item:last-child {
+          border-right: none;
+        }
+        @media(max-width: 768px) {
+          .nb-weather-footer-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+          .nb-weather-footer-item {
+            border-bottom: 1px solid rgba(56,182,255,0.08) !important;
+          }
+          .nb-weather-footer-item:nth-child(3n) {
+            border-right: none !important;
+          }
+          .nb-weather-footer-item:nth-child(4),
+          .nb-weather-footer-item:nth-child(5) {
+            border-bottom: none !important;
+          }
+        }
+        @media(max-width: 480px) {
+          .nb-weather-footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .nb-weather-footer-item:nth-child(3n) {
+            border-right: 1px solid rgba(56,182,255,0.08) !important;
+          }
+          .nb-weather-footer-item:nth-child(even) {
+            border-right: none !important;
+          }
+          .nb-weather-footer-item:nth-child(3),
+          .nb-weather-footer-item:nth-child(4),
+          .nb-weather-footer-item:nth-child(5) {
+            border-bottom: 1px solid rgba(56,182,255,0.08) !important;
+          }
+          .nb-weather-footer-item:nth-child(5) {
+            grid-column: span 2 !important;
+            border-right: none !important;
+            border-bottom: none !important;
+          }
+        }
       `}</style>
     </div>
   );

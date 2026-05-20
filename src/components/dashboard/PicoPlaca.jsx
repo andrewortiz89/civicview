@@ -321,7 +321,7 @@ function DigitosHoy({ today, userDigit }) {
 </p>
       </div>
 
-      <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:16}}>
+      <div className="nb-pyp-digits-grid">
         <div>
           <NbLabel style={{marginBottom:10, color:"rgba(255,102,128,0.85)"}}>
             🚫 No pueden circular hoy
@@ -370,7 +370,7 @@ function CalendarioSemanal({ userDigit }) {
       <p style={{fontSize:"0.75rem", color:T.text3, marginBottom:12, lineHeight:1.5}}>
         La restricción alterna cada día según si la fecha del mes es par o impar.
       </p>
-      <div style={{display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:8}}>
+      <div className="nb-pyp-week-grid">
         {weekCalendar.map(day=>{
           const isToday = day.date === todayStr;
           const digits = parseDigits(day.restrictedDigits);
@@ -460,7 +460,7 @@ function PicoPlacaSkeleton() {
       <Sk w="60%" h={72} r={14}/>
       <Sk h={80} r={12}/>
       <Sk h={60} r={12}/>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:8}}>
+      <div className="nb-pyp-week-grid">
         {[1,2,3,4,5].map(i=><Sk key={i} h={90} r={12}/>)}
       </div>
     </div>
@@ -562,7 +562,7 @@ const PicoPlaca = () => {
       {/* 6. EXCEPCIONES */}
       <div style={{padding:"14px 18px"}}>
         <NbLabel style={{marginBottom:12}}>Excepciones al pico y placa · Decreto 003 de 2023</NbLabel>
-        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10}}>
+        <div className="nb-pyp-exemptions-grid">
           {EXCEPCIONES.map((e,i)=>(
             <div key={i} style={{borderRadius:12, padding:"12px 13px 11px",
               background:"rgba(56,182,255,0.04)", border:"1px solid rgba(56,182,255,0.1)"}}>
@@ -586,16 +586,14 @@ const PicoPlaca = () => {
       <Divider/>
 
       {/* FOOTER STATS */}
-      <div style={{display:"grid", gridTemplateColumns:"repeat(4,1fr)",
-        background:"rgba(0,0,0,0.25)"}}>
+      <div className="nb-pyp-footer-grid">
         {[
           {val:restricted?digits.join("·"):"—", label:"RESTRINGIDOS HOY", color:restricted?T.red:T.green},
           {val:"1",                              label:"FRANJA HORARIA",   color:T.amber},
           {val:String(freeCount),                label:"DÍGITOS LIBRES",   color:T.green},
           {val:"$633.200",                       label:"MULTA C-14 2026",  color:T.text3},
         ].map((s,i)=>(
-          <div key={i} style={{padding:"10px 14px",
-            borderRight:i<3?"1px solid rgba(56,182,255,0.08)":"none"}}>
+          <div key={i} className="nb-pyp-footer-item">
             <p style={{...T.num, fontSize:"1.05rem", color:s.color, marginBottom:3}}>{s.val}</p>
             <p style={{fontSize:"0.5rem", color:T.text3,
               fontFamily:T.mono, letterSpacing:"0.07em"}}>{s.label}</p>
@@ -605,6 +603,79 @@ const PicoPlaca = () => {
 
       <style>{`
         @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.85)}}
+
+        .nb-pyp-digits-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        @media(max-width: 480px) {
+          .nb-pyp-digits-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-pyp-week-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 8px;
+        }
+        @media(max-width: 600px) {
+          .nb-pyp-week-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+        @media(max-width: 420px) {
+          .nb-pyp-week-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        .nb-pyp-exemptions-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+        }
+        @media(max-width: 768px) {
+          .nb-pyp-exemptions-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media(max-width: 480px) {
+          .nb-pyp-exemptions-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-pyp-footer-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          background: rgba(0,0,0,0.25);
+        }
+        .nb-pyp-footer-item {
+          padding: 10px 14px;
+          border-right: 1px solid rgba(56,182,255,0.08);
+          min-width: 0;
+        }
+        .nb-pyp-footer-item:last-child {
+          border-right: none;
+        }
+        @media(max-width: 640px) {
+          .nb-pyp-footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .nb-pyp-footer-item {
+            border-bottom: 1px solid rgba(56,182,255,0.08) !important;
+            border-right: 1px solid rgba(56,182,255,0.08) !important;
+          }
+          .nb-pyp-footer-item:nth-child(even) {
+            border-right: none !important;
+          }
+          .nb-pyp-footer-item:nth-child(3),
+          .nb-pyp-footer-item:nth-child(4) {
+            border-bottom: none !important;
+          }
+        }
       `}</style>
     </div>
   );

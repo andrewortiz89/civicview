@@ -344,41 +344,52 @@ function InteractiveMap({ isWidget=false, onExpandClick }) {
     <div style={{display:'flex',flexDirection:'column',height:'100%',
       background:'#0d1520',overflow:'hidden'}}>
 
-      {/* ── Barra superior con filtros toggle ─────────────── */}
-      <div style={{display:'flex',alignItems:'center',gap:16,
-        padding:'10px 16px',borderBottom:`1px solid ${T.border}`,
-        background:'rgba(5,10,24,0.95)',flexShrink:0,flexWrap:'wrap'}}>
+     {/* ── Barra superior con filtros toggle ─────────────── */}
+      <div style={{
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        gap: 16,
+        padding: '10px 16px', 
+        borderBottom: `1px solid ${T.border}`,
+        background: 'rgba(5,10,24,0.95)', 
+        flexShrink: 0, 
+        flexWrap: 'wrap' // Clave para móviles
+      }}>
 
         {/* Filtros toggle */}
-        {Object.entries(CATS).map(([key,cat])=>(
-          <button key={key} onClick={()=>toggleFilter(key)} style={{
-            display:'flex',alignItems:'center',gap:7,
-            padding:'6px 14px',borderRadius:999,fontSize:'0.8125rem',
-            fontWeight:600,cursor:'pointer',transition:'all 0.2s',
-            border:`1.5px solid ${filters[key]?cat.border:'rgba(56,182,255,0.1)'}`,
-            background:filters[key]?cat.bg:'rgba(56,182,255,0.05)',
-            color:filters[key]?cat.color:T.text3}}>
-            <span>{cat.emoji}</span>
-            <span>{cat.label}</span>
-            {/* Toggle switch visual */}
-            <div style={{width:28,height:14,borderRadius:999,
-              background:filters[key]?cat.color:'rgba(255,255,255,0.12)',
-              position:'relative',transition:'background 0.2s',flexShrink:0}}>
-              <div style={{width:10,height:10,borderRadius:'50%',background:'#fff',
-                position:'absolute',top:2,
-                left:filters[key]?16:2,
-                transition:'left 0.2s'}}/>
-            </div>
-            <span style={{fontSize:'0.625rem',fontFamily:T.mono,
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', flex: '1 1 auto' }}>
+          {Object.entries(CATS).map(([key,cat])=>(
+            <button key={key} onClick={()=>toggleFilter(key)} style={{
+              display:'flex',alignItems:'center',gap:7,
+              padding:'6px 14px',borderRadius:999,fontSize:'0.8125rem',
+              fontWeight:600,cursor:'pointer',transition:'all 0.2s',
+              border:`1.5px solid ${filters[key]?cat.border:'rgba(56,182,255,0.1)'}`,
+              background:filters[key]?cat.bg:'rgba(56,182,255,0.05)',
               color:filters[key]?cat.color:T.text3}}>
-              {POI_DATA[key].length}
-            </span>
-          </button>
-        ))}
+              <span>{cat.emoji}</span>
+              <span className="hidden sm:inline">{cat.label}</span> {/* Ocultar texto en móvil muy pequeño */}
+              {/* Toggle switch visual */}
+              <div style={{width:28,height:14,borderRadius:999,
+                background:filters[key]?cat.color:'rgba(255,255,255,0.12)',
+                position:'relative',transition:'background 0.2s',flexShrink:0}}>
+                <div style={{width:10,height:10,borderRadius:'50%',background:'#fff',
+                  position:'absolute',top:2,
+                  left:filters[key]?16:2,
+                  transition:'left 0.2s'}}/>
+              </div>
+              <span style={{fontSize:'0.625rem',fontFamily:T.mono,
+                color:filters[key]?cat.color:T.text3}}>
+                {POI_DATA[key].length}
+              </span>
+            </button>
+          ))}
+        </div>
 
-        <div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:8}}>
+        {/* Buscador, Toggle Panel y Live Badge */}
+        <div className="nb-map-controls-wrapper" style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           {/* Buscador */}
-          <div style={{position:'relative'}}>
+          <div style={{position:'relative', flex: '1 1 auto', minWidth: '120px', maxWidth: '200px'}}>
             <span style={{position:'absolute',left:10,top:'50%',
               transform:'translateY(-50%)',fontSize:13,color:T.text3}}>🔍</span>
             <input type="text" placeholder="Buscar lugar..."
@@ -386,7 +397,7 @@ function InteractiveMap({ isWidget=false, onExpandClick }) {
               style={{background:'rgba(56,182,255,0.07)',
                 border:`1px solid ${T.border}`,borderRadius:999,
                 color:T.text,fontFamily:T.body,fontSize:'0.8125rem',
-                padding:'7px 14px 7px 32px',outline:'none',width:160}}/>
+                padding:'7px 14px 7px 32px',outline:'none', width: '100%'}}/>
           </div>
 
           {/* Toggle panel */}
@@ -396,7 +407,7 @@ function InteractiveMap({ isWidget=false, onExpandClick }) {
               background: panelOpen?'rgba(124,58,237,0.18)':'rgba(56,182,255,0.06)',
               border:`1px solid ${panelOpen?'rgba(124,58,237,0.4)':T.border}`,
               color:panelOpen?T.purpleL:T.text2,fontSize:'0.8125rem',
-              transition:'all 0.2s'}}>
+              transition:'all 0.2s', flexShrink: 0}}>
             ☰ {panelOpen?'Ocultar':'Lista'}
           </button>
 
@@ -404,29 +415,24 @@ function InteractiveMap({ isWidget=false, onExpandClick }) {
           <div style={{display:'flex',alignItems:'center',gap:6,
             padding:'5px 10px',borderRadius:999,
             background:'rgba(74,222,128,0.08)',
-            border:'1px solid rgba(74,222,128,0.22)'}}>
+            border:'1px solid rgba(74,222,128,0.22)', flexShrink: 0}}>
             <span style={{width:6,height:6,borderRadius:'50%',
               background:T.greenL,boxShadow:`0 0 6px ${T.greenL}`,
               display:'inline-block',animation:'livePing 2s ease-in-out infinite'}}/>
-            <span style={{fontSize:'0.6875rem',color:T.greenL,
+            <span className="hidden sm:inline" style={{fontSize:'0.6875rem',color:T.greenL,
               fontFamily:T.mono,letterSpacing:'0.06em',fontWeight:500}}>EN VIVO</span>
           </div>
         </div>
       </div>
 
       {/* ── Contenido: mapa + panel ───────────────────────── */}
-      <div style={{flex:1,display:'flex',minHeight:0,position:'relative'}}>
-
+      <div className="flex flex-col md:flex-row flex-1 relative min-h-0"> {/* Clases Tailwind para responsive */}
         {/* Mapa */}
-        <div ref={mapRef} style={{flex:1,minWidth:0,zIndex:0}}/>
+        <div ref={mapRef} className="flex-1 w-full min-h-[300px] z-0" /> {/* Asegurar alto mínimo en móvil */}
 
         {/* Panel lateral */}
         {panelOpen && (
-          <div style={{width:300,flexShrink:0,
-            background:'rgba(5,10,24,0.97)',
-            borderLeft:`1px solid ${T.border}`,
-            overflowY:'auto',display:'flex',flexDirection:'column',
-            zIndex:10}}>
+          <div className="nb-map-sidebar w-full md:w-[300px] shrink-0 bg-[#050a18f7] border-t md:border-t-0 md:border-l border-[rgba(56,182,255,0.1)] overflow-y-auto flex flex-col z-10 md:h-full h-[40vh] md:max-h-none">
 
             {/* Panel header */}
             <div style={{padding:'14px 14px 10px',
@@ -548,12 +554,9 @@ function InteractiveMap({ isWidget=false, onExpandClick }) {
       </div>
 
       {/* ── Footer stats ──────────────────────────────────── */}
-      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',
-        borderTop:`1px solid ${T.border}`,flexShrink:0,
-        background:'rgba(0,0,0,0.25)'}}>
+      <div className="grid grid-cols-2 md:grid-cols-4 border-t border-[rgba(56,182,255,0.1)] shrink-0 bg-[rgba(0,0,0,0.25)]">
         {statsFooter.map((s,i)=>(
-          <div key={i} style={{padding:'10px 16px',
-            borderRight:i<3?`1px solid ${T.border}`:'none'}}>
+          <div key={i} className="nb-footer-stat-item p-[10px_16px]">
             <p style={{fontFamily:T.display,fontWeight:800,
               fontSize:'1.125rem',color:s.color,lineHeight:1,marginBottom:4}}>
               {s.val}
@@ -566,6 +569,55 @@ function InteractiveMap({ isWidget=false, onExpandClick }) {
 
       <style>{`
         @keyframes livePing{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.85)}}
+
+        /* ── Wrapper de Controles en la barra superior ── */
+        .nb-map-controls-wrapper {
+          width: 100%;
+        }
+        @media(min-width: 768px) {
+          .nb-map-controls-wrapper {
+            width: auto;
+          }
+        }
+
+        /* ── Panel lateral absoluto en móvil ── */
+        @media(max-width: 767px) {
+          .nb-map-sidebar {
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 38vh !important;
+            max-height: 280px !important;
+            z-index: 1000 !important;
+            border-top: 1px solid rgba(56,182,255,0.18) !important;
+            border-left: none !important;
+          }
+        }
+
+        /* ── Estilos de los ítems del footer de estadísticas ── */
+        .nb-footer-stat-item {
+          border-bottom: 1px solid rgba(56,182,255,0.1);
+          border-right: none;
+        }
+        /* Elementos impares (columna izquierda en móvil de 2 col) */
+        .nb-footer-stat-item:nth-child(odd) {
+          border-right: 1px solid rgba(56,182,255,0.1) !important;
+        }
+        /* Últimos dos elementos no tienen borde inferior */
+        .nb-footer-stat-item:nth-child(3),
+        .nb-footer-stat-item:nth-child(4) {
+          border-bottom: none;
+        }
+        @media(min-width: 768px) {
+          .nb-footer-stat-item {
+            border-bottom: none !important;
+            border-right: 1px solid rgba(56,182,255,0.1) !important;
+          }
+          .nb-footer-stat-item:last-child {
+            border-right: none !important;
+          }
+        }
       `}</style>
     </div>
   )

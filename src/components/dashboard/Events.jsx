@@ -676,13 +676,7 @@ function EventsSkeleton() {
     >
       <Sk w="40%" h={14} />
       {/* Skeleton sincronizado con las nuevas proporciones del Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "210px 1.8fr 1.2fr",
-          gap: 14,
-        }}
-      >
+      <div className="nb-events-main-grid" style={{ gap: 14 }}>
         <Sk h={260} r={12} />
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {[1, 2, 3].map((i) => (
@@ -982,15 +976,7 @@ const Events = () => {
       </div>
 
       {/* ── 3 columnas (MODIFICADO: Distribución Proporcional Pro-Centro) ─ */}
-      <div
-        style={{
-          display: "grid",
-          // MODIFICADO: ratio dinámico que favorece mucho más al centro y equilibra laterales
-          gridTemplateColumns: "210px 1.6fr 1.4fr",
-          minHeight: 380,
-          overflow: "hidden",
-        }}
-      >
+      <div className="nb-events-main-grid">
         {/* Calendario */}
         <div
           style={{
@@ -1247,15 +1233,7 @@ const Events = () => {
       </div>
 
       {/* ── Footer stats ──────────────────────────────────── */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4,1fr)",
-          borderTop: "1px solid rgba(56,182,255,0.08)",
-          background: "rgba(0,0,0,0.2)",
-          flexShrink: 0,
-        }}
-      >
+      <div className="nb-events-footer-grid">
         {[
           { val: String(todayCount), label: "EVENTOS HOY", color: T.purpleL },
           { val: String(weekCount), label: "ESTA SEMANA", color: T.pinkL },
@@ -1266,16 +1244,7 @@ const Events = () => {
           },
           { val: String(totalCount), label: "TOTAL", color: T.cyanL },
         ].map((s, i) => (
-          <div
-            key={i}
-            style={{
-              padding: "10px 16px",
-              borderRight: i < 3 ? `1px solid ${T.border}` : "none",
-              display: "flex",
-              alignItems: "center",
-              gap: 7,
-            }}
-          >
+          <div key={i} className="nb-events-footer-item">
             <span
               style={{
                 width: 6,
@@ -1314,6 +1283,62 @@ const Events = () => {
 
       <style>{`
         @keyframes livePing{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.85)}}
+
+        .nb-events-main-grid {
+          display: grid;
+          grid-template-columns: 210px 1.6fr 1.4fr;
+          min-height: 380px;
+          overflow: hidden;
+        }
+        @media(max-width: 767px) {
+          .nb-events-main-grid {
+            grid-template-columns: 1fr !important;
+            min-height: auto !important;
+            overflow-y: auto !important;
+          }
+          .nb-events-main-grid > div {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(56,182,255,0.08) !important;
+          }
+          .nb-events-main-grid > div:last-child {
+            border-bottom: none !important;
+          }
+        }
+
+        .nb-events-footer-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          border-top: 1px solid rgba(56,182,255,0.08);
+          background: rgba(0,0,0,0.2);
+          flex-shrink: 0;
+        }
+        .nb-events-footer-item {
+          padding: 10px 16px;
+          border-right: 1px solid rgba(56,182,255,0.1);
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          min-width: 0;
+        }
+        .nb-events-footer-item:last-child {
+          border-right: none;
+        }
+        @media(max-width: 640px) {
+          .nb-events-footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .nb-events-footer-item {
+            border-bottom: 1px solid rgba(56,182,255,0.08) !important;
+            border-right: 1px solid rgba(56,182,255,0.1) !important;
+          }
+          .nb-events-footer-item:nth-child(even) {
+            border-right: none !important;
+          }
+          .nb-events-footer-item:nth-child(3),
+          .nb-events-footer-item:nth-child(4) {
+            border-bottom: none !important;
+          }
+        }
       `}</style>
     </div>
   );

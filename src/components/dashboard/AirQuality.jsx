@@ -166,7 +166,7 @@ function AQISkeleton() {
   return (
     <div style={{ padding:20, display:"flex", flexDirection:"column", gap:16 }}>
       <Sk w="40%" h={13}/> <Sk h={90} r={12}/> <Sk h={12} r={6}/>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
+      <div className="nb-aqi-detail-grid">
         <Sk h={110} r={14}/><Sk h={110} r={14}/><Sk h={110} r={14}/><Sk h={110} r={14}/>
       </div>
     </div>
@@ -260,7 +260,7 @@ const AirQuality = () => {
         </div>
 
         {/* Grid superior: ICA + contaminantes clave */}
-        <div style={{ display:"grid", gridTemplateColumns:"1.2fr 1fr 1fr 1fr", gap:12 }}>
+        <div className="nb-aqi-top-grid">
 
           {/* ICA Global */}
           <div style={{ borderRadius:14, padding:"16px",
@@ -394,7 +394,7 @@ const AirQuality = () => {
       {/* ── Sección 2: Contaminantes en detalle ─────────────── */}
       <div style={{ padding:"16px 18px" }}>
         <NbLabel style={{ marginBottom:12 }}>Contaminantes · Análisis detallado</NbLabel>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr 1fr", gap:10 }}>
+        <div className="nb-aqi-detail-grid">
           {contaminantes.map(c=>(
             c.value != null && (
               <ContaminanteCard
@@ -420,7 +420,7 @@ const AirQuality = () => {
 
       {/* ── Sección 3: Recomendación + escala ───────────────── */}
       <div style={{ padding:"16px 18px" }}>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+        <div className="nb-aqi-rec-grid">
 
           {/* Recomendación principal */}
           <div>
@@ -482,7 +482,7 @@ const AirQuality = () => {
         <NbLabel style={{ marginBottom:12 }}>
           Recomendaciones · ICA {aqi} {category}
         </NbLabel>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:10 }}>
+        <div className="nb-aqi-users-grid">
           {recs.map((r,i)=>(
             <div key={i} style={{ borderRadius:12, padding:"14px 14px 12px",
               background:"rgba(56,182,255,0.05)",
@@ -502,7 +502,7 @@ const AirQuality = () => {
 
       {/* ── Footer ───────────────────────────────────────────── */}
       <div style={{ padding:"10px 18px", display:"flex",
-        alignItems:"center", justifyContent:"space-between",
+        alignItems:"center", justifyContent:"space-between", gap:8, flexWrap:"wrap",
         background:"rgba(0,0,0,0.18)" }}>
         <div style={{ display:"flex", alignItems:"center", gap:7 }}>
           <LiveDot color={T.greenL}/>
@@ -512,10 +512,82 @@ const AirQuality = () => {
           </span>
         </div>
         <span style={{ fontSize:"0.6875rem", color:T.text3,
-          fontFamily:T.mono }}>
+fontFamily:T.mono }}>
           Fuente: AQICN · RMCAB
         </span>
       </div>
+      <style>{`
+        .nb-aqi-top-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr 1fr 1fr;
+          gap: 12px;
+        }
+        @media(max-width: 768px) {
+          .nb-aqi-top-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .nb-aqi-top-grid > div:first-child {
+            grid-column: span 2 !important;
+          }
+          .nb-aqi-top-grid > div:last-child {
+            grid-column: span 2 !important;
+            flex-direction: row !important;
+          }
+          .nb-aqi-top-grid > div:last-child > div {
+            flex: 1 !important;
+          }
+        }
+        @media(max-width: 480px) {
+          .nb-aqi-top-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .nb-aqi-top-grid > div:first-child,
+          .nb-aqi-top-grid > div:last-child {
+            grid-column: auto !important;
+          }
+          .nb-aqi-top-grid > div:last-child {
+            flex-direction: column !important;
+          }
+        }
+
+        .nb-aqi-detail-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          gap: 10px;
+        }
+        @media(max-width: 768px) {
+          .nb-aqi-detail-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media(max-width: 480px) {
+          .nb-aqi-detail-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-aqi-rec-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+        @media(max-width: 640px) {
+          .nb-aqi-rec-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .nb-aqi-users-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+        }
+        @media(max-width: 768px) {
+          .nb-aqi-users-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
